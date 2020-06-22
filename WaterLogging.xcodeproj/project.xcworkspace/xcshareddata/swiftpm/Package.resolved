@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "UIKitPro",
+        "repositoryURL": "https://github.com/LucasBest/UIKitPro.git",
+        "state": {
+          "branch": "master",
+          "revision": "00892ca8a1720ce33858d1b6c56efb21081b2c2d",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
