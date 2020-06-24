@@ -10,11 +10,14 @@
 		9CD749B624A0FCAF0011B20A /* UIKitPro in Frameworks */ = {isa = PBXBuildFile; productRef = 9CD749B524A0FCAF0011B20A /* UIKitPro */; };
 		9CD749BF24A1441B0011B20A /* WaterLoggingGoalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD749BE24A1441B0011B20A /* WaterLoggingGoalCollectionViewCell.swift */; };
 		9CD749C124A1442D0011B20A /* WaterLoggingProgressCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD749C024A1442D0011B20A /* WaterLoggingProgressCollectionViewCell.swift */; };
-		9CD749C324A144400011B20A /* WaterLoggingAddToLogCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD749C224A144400011B20A /* WaterLoggingAddToLogCollectionViewCell.swift */; };
 		9CD749C624A14F460011B20A /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD749C524A14F460011B20A /* DataService.swift */; };
 		9CD749C824A1513F0011B20A /* GoalPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD749C724A1513F0011B20A /* GoalPickerViewController.swift */; };
 		9CD749EA24A17BF10011B20A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD749E924A17BF10011B20A /* SceneDelegate.swift */; };
 		9CD749ED24A17CC40011B20A /* WaterPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD749EC24A17CC40011B20A /* WaterPickerView.swift */; };
+		9CD749EF24A29D7F0011B20A /* HealthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD749EE24A29D7F0011B20A /* HealthService.swift */; };
+		9CD749F224A29D9F0011B20A /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CD749F124A29D9F0011B20A /* HealthKit.framework */; };
+		9CD749F524A2A2C60011B20A /* ErrorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD749F424A2A2C60011B20A /* ErrorPresenter.swift */; };
+		9CD749F724A2A3860011B20A /* AlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD749F624A2A3860011B20A /* AlertPresenter.swift */; };
 		B31AA1C824734EAB007708F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31AA1C724734EAB007708F4 /* AppDelegate.swift */; };
 		B31AA1CF24734EAB007708F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B31AA1CD24734EAB007708F4 /* Main.storyboard */; };
 		B31AA1D224734EAB007708F4 /* WaterLogging.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B31AA1D024734EAB007708F4 /* WaterLogging.xcdatamodeld */; };
@@ -22,7 +25,7 @@
 		B31AA1D724734EAB007708F4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B31AA1D524734EAB007708F4 /* LaunchScreen.storyboard */; };
 		B31AA1E224734EAC007708F4 /* WaterLoggingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31AA1E124734EAC007708F4 /* WaterLoggingTests.swift */; };
 		B31AA1ED24734EC7007708F4 /* TrackWaterCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31AA1EC24734EC7007708F4 /* TrackWaterCollectionViewController.swift */; };
-		B31AA1EF24734EE8007708F4 /* VisualizeWaterIntakeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31AA1EE24734EE8007708F4 /* VisualizeWaterIntakeViewController.swift */; };
+		B31AA1EF24734EE8007708F4 /* AddWaterIntakeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31AA1EE24734EE8007708F4 /* AddWaterIntakeViewController.swift */; };
 		B31AA1F124734F10007708F4 /* AppTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31AA1F024734F10007708F4 /* AppTabBarController.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,11 +42,15 @@
 /* Begin PBXFileReference section */
 		9CD749BE24A1441B0011B20A /* WaterLoggingGoalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterLoggingGoalCollectionViewCell.swift; sourceTree = "<group>"; };
 		9CD749C024A1442D0011B20A /* WaterLoggingProgressCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterLoggingProgressCollectionViewCell.swift; sourceTree = "<group>"; };
-		9CD749C224A144400011B20A /* WaterLoggingAddToLogCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterLoggingAddToLogCollectionViewCell.swift; sourceTree = "<group>"; };
 		9CD749C524A14F460011B20A /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		9CD749C724A1513F0011B20A /* GoalPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalPickerViewController.swift; sourceTree = "<group>"; };
 		9CD749E924A17BF10011B20A /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		9CD749EC24A17CC40011B20A /* WaterPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterPickerView.swift; sourceTree = "<group>"; };
+		9CD749EE24A29D7F0011B20A /* HealthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthService.swift; sourceTree = "<group>"; };
+		9CD749F124A29D9F0011B20A /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		9CD749F424A2A2C60011B20A /* ErrorPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPresenter.swift; sourceTree = "<group>"; };
+		9CD749F624A2A3860011B20A /* AlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresenter.swift; sourceTree = "<group>"; };
+		9CD749F824A2A5380011B20A /* WaterLogging.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WaterLogging.entitlements; sourceTree = "<group>"; };
 		B31AA1C424734EAB007708F4 /* WaterLogging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaterLogging.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B31AA1C724734EAB007708F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B31AA1CE24734EAB007708F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -55,7 +62,7 @@
 		B31AA1E124734EAC007708F4 /* WaterLoggingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterLoggingTests.swift; sourceTree = "<group>"; };
 		B31AA1E324734EAC007708F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B31AA1EC24734EC7007708F4 /* TrackWaterCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackWaterCollectionViewController.swift; sourceTree = "<group>"; };
-		B31AA1EE24734EE8007708F4 /* VisualizeWaterIntakeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualizeWaterIntakeViewController.swift; sourceTree = "<group>"; };
+		B31AA1EE24734EE8007708F4 /* AddWaterIntakeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWaterIntakeViewController.swift; sourceTree = "<group>"; };
 		B31AA1F024734F10007708F4 /* AppTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -65,6 +72,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9CD749B624A0FCAF0011B20A /* UIKitPro in Frameworks */,
+				9CD749F224A29D9F0011B20A /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,7 +92,8 @@
 				B31AA1F024734F10007708F4 /* AppTabBarController.swift */,
 				9CD749C724A1513F0011B20A /* GoalPickerViewController.swift */,
 				B31AA1EC24734EC7007708F4 /* TrackWaterCollectionViewController.swift */,
-				B31AA1EE24734EE8007708F4 /* VisualizeWaterIntakeViewController.swift */,
+				B31AA1EE24734EE8007708F4 /* AddWaterIntakeViewController.swift */,
+				9CD749F324A2A2BC0011B20A /* Utils */,
 			);
 			name = "View Controller";
 			sourceTree = "<group>";
@@ -123,7 +132,6 @@
 			children = (
 				9CD749BE24A1441B0011B20A /* WaterLoggingGoalCollectionViewCell.swift */,
 				9CD749C024A1442D0011B20A /* WaterLoggingProgressCollectionViewCell.swift */,
-				9CD749C224A144400011B20A /* WaterLoggingAddToLogCollectionViewCell.swift */,
 			);
 			name = "CollectionView Cells";
 			sourceTree = "<group>";
@@ -132,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				9CD749C524A14F460011B20A /* DataService.swift */,
+				9CD749EE24A29D7F0011B20A /* HealthService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -144,12 +153,30 @@
 			name = Controls;
 			sourceTree = "<group>";
 		};
+		9CD749F024A29D9F0011B20A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9CD749F124A29D9F0011B20A /* HealthKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9CD749F324A2A2BC0011B20A /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				9CD749F624A2A3860011B20A /* AlertPresenter.swift */,
+				9CD749F424A2A2C60011B20A /* ErrorPresenter.swift */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
 		B31AA1BB24734EAA007708F4 = {
 			isa = PBXGroup;
 			children = (
 				B31AA1C624734EAB007708F4 /* WaterLogging */,
 				B31AA1E024734EAC007708F4 /* WaterLoggingTests */,
 				B31AA1C524734EAB007708F4 /* Products */,
+				9CD749F024A29D9F0011B20A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -165,6 +192,7 @@
 		B31AA1C624734EAB007708F4 /* WaterLogging */ = {
 			isa = PBXGroup;
 			children = (
+				9CD749F824A2A5380011B20A /* WaterLogging.entitlements */,
 				B31AA1C724734EAB007708F4 /* AppDelegate.swift */,
 				9CD749E924A17BF10011B20A /* SceneDelegate.swift */,
 				9CD749BA24A1431B0011B20A /* Resources */,
@@ -293,15 +321,17 @@
 			files = (
 				9CD749C624A14F460011B20A /* DataService.swift in Sources */,
 				B31AA1ED24734EC7007708F4 /* TrackWaterCollectionViewController.swift in Sources */,
+				9CD749EF24A29D7F0011B20A /* HealthService.swift in Sources */,
 				9CD749C124A1442D0011B20A /* WaterLoggingProgressCollectionViewCell.swift in Sources */,
 				9CD749C824A1513F0011B20A /* GoalPickerViewController.swift in Sources */,
+				9CD749F724A2A3860011B20A /* AlertPresenter.swift in Sources */,
 				9CD749ED24A17CC40011B20A /* WaterPickerView.swift in Sources */,
-				B31AA1EF24734EE8007708F4 /* VisualizeWaterIntakeViewController.swift in Sources */,
+				B31AA1EF24734EE8007708F4 /* AddWaterIntakeViewController.swift in Sources */,
+				9CD749F524A2A2C60011B20A /* ErrorPresenter.swift in Sources */,
 				B31AA1F124734F10007708F4 /* AppTabBarController.swift in Sources */,
 				B31AA1C824734EAB007708F4 /* AppDelegate.swift in Sources */,
 				9CD749EA24A17BF10011B20A /* SceneDelegate.swift in Sources */,
 				B31AA1D224734EAB007708F4 /* WaterLogging.xcdatamodeld in Sources */,
-				9CD749C324A144400011B20A /* WaterLoggingAddToLogCollectionViewCell.swift in Sources */,
 				9CD749BF24A1441B0011B20A /* WaterLoggingGoalCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -462,6 +492,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = WaterLogging/WaterLogging.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = WaterLogging/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -480,6 +511,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = WaterLogging/WaterLogging.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = WaterLogging/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;

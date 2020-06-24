@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F101" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Goal" representedClassName="Goal" syncable="YES" codeGenerationType="class">
-        <attribute name="quantity" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="quantity" optional="YES" attributeType="Decimal"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="intakes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Intake" inverseName="goal" inverseEntity="Intake"/>
+    </entity>
+    <entity name="Intake" representedClassName="Intake" syncable="YES" codeGenerationType="class">
+        <attribute name="healthUUID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="quantity" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="goal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Goal" inverseName="intakes" inverseEntity="Goal"/>
     </entity>
     <elements>
-        <element name="Goal" positionX="-54" positionY="0" width="128" height="73"/>
+        <element name="Goal" positionX="-54" positionY="0" width="128" height="88"/>
+        <element name="Intake" positionX="-36" positionY="36" width="128" height="88"/>
     </elements>
 </model>

@@ -8,6 +8,7 @@
 
 import UIKit
 
-class WaterLoggingProgressCollectionViewCell: UICollectionViewCell {
-    
+final class WaterLoggingProgressCollectionViewCell: UICollectionViewCell {
+    @IBOutlet private(set) var progressLabel: UILabel!
+    @IBOutlet private(set) var progressView: UIProgressView!
 }

@@ -11,8 +11,7 @@ final class TrackWaterCollectionViewController: UICollectionViewController, Goal
     private enum Section: Hashable, Equatable, Comparable {
 
         case goal(Measurement<UnitVolume>?)
-        case progress(Float?)
-        case add
+        case progress(DataService.ProgressTotals)
 
         static func < (lhs: Self, rhs: Self) -> Bool {
             return lhs.priority() < rhs.priority()
@@ -34,8 +33,6 @@ final class TrackWaterCollectionViewController: UICollectionViewController, Goal
                 return 0
             case .progress:
                 return 1
-            case .add:
-                return 2
             }
         }
     }
@@ -51,6 +48,10 @@ final class TrackWaterCollectionViewController: UICollectionViewController, Goal
             self.sections.update(with: .goal(goal))
         }
 
+        mutating func updateProgress(_ progress: DataService.ProgressTotals) {
+            self.sections.update(with: .progress(progress))
+        }
+
         func currentGoal() -> Measurement<UnitVolume>? {
             for section in self.sections {
                 switch section {
@@ -64,13 +65,9 @@ final class TrackWaterCollectionViewController: UICollectionViewController, Goal
             return nil
         }
 
-        func sectionAtIndex(_ index: Int) -> Section {
-            guard index >= 0 else {
-                return .goal(nil)
-            }
-
-            guard index < self.sections.count else {
-                return .add
+        func sectionAtIndex(_ index: Int) -> Section? {
+            guard index >= 0, index < self.sections.count else {
+                return nil
             }
 
             return self.sections.sorted()[index]
@@ -82,11 +79,12 @@ final class TrackWaterCollectionViewController: UICollectionViewController, Goal
     override func viewDidLoad() {
         super.viewDidLoad()
         self.collectionView.collectionViewLayout = self.createLayout()
+    }
 
-        if let realCurrentGoal = DataService.shared.currentGoalForToday() {
-            self.tracking.updateGoal(realCurrentGoal)
-            self.collectionView.reloadData()
-        }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        self.reloadViews()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -112,7 +110,10 @@ final class TrackWaterCollectionViewController: UICollectionViewController, Goal
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let section = self.tracking.sectionAtIndex(indexPath.section)
+        guard let section = self.tracking.sectionAtIndex(indexPath.section) else {
+            /* Not an ideal solution here. Would prefer to have a placeholder cell as backup but in the interest of time, skipping that implementation. */
+            return UICollectionViewCell()
+        }
 
         switch section {
         case .goal(let goal):
@@ -121,12 +122,12 @@ final class TrackWaterCollectionViewController: UICollectionViewController, Goal
             cell.setGoal(goal)
 
             return cell
-        case .progress(let progress):
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WaterLoggingProgressCollectionViewCell.self), for: indexPath)
+        case .progress(let progressTotals):
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WaterLoggingProgressCollectionViewCell.self), for: indexPath) as! WaterLoggingProgressCollectionViewCell
 
-            return cell
-        case .add:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WaterLoggingAddToLogCollectionViewCell.self), for: indexPath)
+            cell.progressLabel.text = String(format: NSLocalizedString("%@ out of %@ consumed", comment: "Format for progress of water consumed in a day"), DataService.shared.formatter.string(from: progressTotals.progressMeasurement), DataService.shared.formatter.string(from: progressTotals.goal))
+
+            cell.progressView.progress = Float(progressTotals.progress)
 
             return cell
         }
@@ -148,21 +149,39 @@ final class TrackWaterCollectionViewController: UICollectionViewController, Goal
     // MARK: - GoalPickerViewControllerDelegate
 
     final func goalPickerViewController(_ goalPickerViewController: GoalPickerViewController, didSelectGoal goal: Measurement<UnitVolume>) {
-        self.tracking.updateGoal(goal)
-        self.collectionView.reloadData()
 
+        self.reloadViews()
         self.dismiss(animated: true)
     }
 
     // MARK: - Actions
 
-    @IBAction final func unwindToTrackWaterCollectionViewController(_ segue: UIStoryboardSegue) {}
+    @IBAction final func unwindToTrackWaterCollectionViewController(_ segue: UIStoryboardSegue) {
+        self.reloadViews()
+    }
 
     // MARK: - Private
 
+    private func reloadViews() {
+        var reload = false
+
+        if let realCurrentGoal = DataService.shared.currentGoalForToday() {
+            self.tracking.updateGoal(realCurrentGoal)
+            reload = true
+        }
+
+        if let realProgress = DataService.shared.currentProgressForToday() {
+            self.tracking.updateProgress(realProgress)
+            reload = true
+        }
+
+        if reload {
+            self.collectionView.reloadData()
+        }
+    }
+
     private func createLayout() -> UICollectionViewCompositionalLayout {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex, environment) -> NSCollectionLayoutSection? in
-            let section = self.tracking.sectionAtIndex(sectionIndex)
 
             let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(100.0)))
 
