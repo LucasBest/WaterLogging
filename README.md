@@ -15,13 +15,17 @@ The first was to build a "Day" predicate and the second was to get a jumpstart o
 
 ## Running the App
 
-The Watter Logging Xcode project is ready to run the Water Logging app on the iOS Simulator. Simply choose the "Watter Loggin" scheme and an iOS Simulator in the simulator dropdown and click the "Run" button.
+The Water Logging Xcode project is ready to run the Water Logging app on the iOS Simulator. Simply choose the "Water Loggin" scheme and an iOS Simulator in the simulator dropdown and click the "Run" button.
 
 ## Testing
 
 I have set up one unit test and one UI test in the Water Logging testing targets. There could absolutely be more test coverage but in the interest of time I just added basic tests to show what a typical unit test and ui test could and should look like. The two tests that are there should pass when testing the target.
 
 ## Architecture
+
+### Language
+
+I am most familiar with the Swift programming language so Water Logging is written entirely in Swift using the most recent version as of the time of development which is Swift 5.2.
 
 ### UI
 
