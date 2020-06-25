@@ -19,7 +19,7 @@ The Watter Logging Xcode project is ready to run the Water Logging app on the iO
 
 ## Testing
 
-I have set up one unit test and one UI test in the Water Logging testing targets. There could absolutely be more test coverage but in the interest of time I just added basic tests to show what a typical unit test and ui test could and should look like. The two tests that are there should pass when when testing the target.
+I have set up one unit test and one UI test in the Water Logging testing targets. There could absolutely be more test coverage but in the interest of time I just added basic tests to show what a typical unit test and ui test could and should look like. The two tests that are there should pass when testing the target.
 
 ## Architecture
 
