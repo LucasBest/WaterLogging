@@ -8,8 +8,8 @@ Icons made by <a href="https://www.flaticon.com/authors/wissawa-khamsriwath" tit
 
 I consulted Stack Overflow and Apple Developer documentation for 2 features within the Water Logging app 
 
-1) // https://stackoverflow.com/questions/40312105/core-data-predicate-filter-by-todays-date
-2) // https://developer.apple.com/documentation/healthkit/hksamplequery/executing_sample_queries
+1)  https://stackoverflow.com/questions/40312105/core-data-predicate-filter-by-todays-date
+2)  https://developer.apple.com/documentation/healthkit/hksamplequery/executing_sample_queries
 
 The first was to build a "Day" predicate and the second was to get a jumpstart on creating a query to `HKHealthStore`. Both instances are commented above the function where I drew from the above sources.
 
