@@ -11,24 +11,15 @@ import XCTest
 
 class WaterLoggingTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
+    func testRecommendedIntake() throws {
+        let defaultRecommendation = DataService.shared.recommendedIntakeBasedOnMass(nil)
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+        XCTAssertEqual(defaultRecommendation.converted(to: .fluidOunces).value
+            , 100.0, accuracy: 0.1)
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
+        let healthKitRecommendation = DataService.shared.recommendedIntakeBasedOnMass(Measurement<UnitMass>(value: 200.0, unit: .pounds))
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+        XCTAssertEqual(healthKitRecommendation.converted(to: .fluidOunces).value
+            , 133.33, accuracy: 0.1)
     }
-
 }

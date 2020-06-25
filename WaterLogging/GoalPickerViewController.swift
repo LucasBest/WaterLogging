@@ -31,10 +31,25 @@ final class GoalPickerViewController: UIViewController {
     @IBOutlet private(set) var quantitySlider: UISlider!
     @IBOutlet private(set) var setGoalButton: UIButton!
 
+    private var userWeight: Measurement<UnitMass>?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.refreshFromCurrentGoal()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        HealthService.shared.getWeight { (mass) in
+            self.userWeight = mass
+
+            if mass != nil {
+                self.navigationItem.rightBarButtonItem = self.healthkitBarButtonItem
+                self.healthkitExplanationParentView.isHidden = false
+            }
+        }
     }
 
     // MARK: - Actions
@@ -50,11 +65,16 @@ final class GoalPickerViewController: UIViewController {
         self.delegate?.goalPickerViewController(self, didSelectGoal: goal)
     }
 
+    @IBAction final func setRecommendedGoalBasedOnWeight(_ sender: UIBarButtonItem) {
+        self.currentGoal = DataService.shared.recommendedIntakeBasedOnMass(self.userWeight)
+        self.refreshFromCurrentGoal()
+    }
+
     // MARK: - Private
 
     private func refreshFromCurrentGoal() {
         if let realCurrentGoal = self.currentGoal {
-            self.quantitySlider.value = Float(realCurrentGoal.value / DataService.shared.maximumDailyIntake * Double(self.quantitySlider.value))
+            self.quantitySlider.value = Float(realCurrentGoal.value / DataService.shared.maximumDailyIntake)
             self.refreshFromMeasurement(realCurrentGoal)
         }
     }

@@ -17,14 +17,29 @@ struct HealthService {
     private let waterIntakeQuantityType = HKQuantityType.quantityType(forIdentifier: .dietaryWater)!
 
     func canRequestDietaryWaterPermissions() -> Bool {
+        guard HKHealthStore.isHealthDataAvailable() else {
+            return false
+        }
+
         return self.healthStore.authorizationStatus(for: self.waterIntakeQuantityType) == .notDetermined
     }
 
     func isAuthorizedToShareDietaryWaterData() -> Bool {
+        guard HKHealthStore.isHealthDataAvailable() else {
+            return false
+        }
+
         return self.healthStore.authorizationStatus(for: self.waterIntakeQuantityType) == .sharingAuthorized
     }
 
     func requestDietaryWaterAuthorization(completion: @escaping (Bool) -> (), failure: @escaping (Error) -> ()) {
+        guard HKHealthStore.isHealthDataAvailable() else {
+            DispatchQueue.main.async {
+                completion(false)
+            }
+            return
+        }
+
         self.healthStore.requestAuthorization(toShare: [self.waterIntakeQuantityType], read: [self.waterIntakeQuantityType]) { (authorized, error) in
             if let realError = error {
                 DispatchQueue.main.async {
@@ -64,29 +79,60 @@ struct HealthService {
         }
     }
 
-    func getWaterIntakeForSamplesWithUUIDs(_ uuids: [UUID], completion: @escaping(Measurement<UnitVolume>?) -> ()) {
-        let predicate = HKQuery.predicateForObjects(with: Set(uuids))
+    func getWeight() {
 
-        let query = HKSampleQuery(sampleType: self.waterIntakeQuantityType, predicate: predicate, limit: 1, sortDescriptors: nil) { (query, samples, error) in
-            guard error == nil else {
-                DispatchQueue.main.async {
-                    completion(nil)
+    }
+
+    func getWeight(completion: @escaping(Measurement<UnitMass>?) -> ()) {
+        let weightType = HKQuantityType.quantityType(forIdentifier: .bodyMass)!
+
+        func query() {
+            // https://developer.apple.com/documentation/healthkit/hksamplequery/executing_sample_queries
+            let sortByDate = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: true)
+
+            let query = HKSampleQuery(sampleType: HKQuantityType.quantityType(forIdentifier: .bodyMass)!, predicate: nil, limit: 1, sortDescriptors: [sortByDate]) { (query, samples, error) in
+                guard error == nil else {
+                    DispatchQueue.main.async {
+                        completion(nil)
+                    }
+
+                    return
                 }
 
-                return
-            }
+                guard let firstSample = samples?.first as? HKQuantitySample else {
+                    DispatchQueue.main.async {
+                        completion(nil)
+                    }
 
-            guard let firstSample = samples?.first as? HKQuantitySample else {
-                DispatchQueue.main.async {
-                    completion(nil)
+                    return
                 }
 
-                return
+                DispatchQueue.main.async {
+                     completion(Measurement<UnitMass>(value: firstSample.quantity.doubleValue(for: .pound()), unit: .pounds))
+                }
             }
 
-            completion(Measurement<UnitVolume>(value: firstSample.quantity.doubleValue(for: .fluidOunceUS()), unit: .fluidOunces))
+            self.healthStore.execute(query)
         }
 
-        self.healthStore.execute(query)
+        switch self.healthStore.authorizationStatus(for: weightType) {
+        case .notDetermined:
+            self.healthStore.requestAuthorization(toShare: nil, read: [weightType]) { (authorized, error) in
+                if error == nil && authorized {
+                    query()
+                }
+                else {
+                    DispatchQueue.main.async {
+                        completion(nil)
+                    }
+                }
+            }
+        case .sharingAuthorized, .sharingDenied:
+            query()
+        @unknown default:
+            DispatchQueue.main.async {
+                completion(nil)
+            }
+        }
     }
 }

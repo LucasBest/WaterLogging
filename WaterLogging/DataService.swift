@@ -46,6 +46,15 @@ final class DataService {
         return container
     }()
 
+    /*
+     Note: - This is a completely arbitrary recommendation. I am just taking two thirds of the persons' weight, and saying that's how many fluid ounces of water they should consume. Again, this is completely arbitrary and probably not correct and just meant as an example. It would however be fairly easy to replace this algorithm with one from a much more informed health scientist.
+     */
+    public func recommendedIntakeBasedOnMass(_ weight: Measurement<UnitMass>?) -> Measurement<UnitVolume> {
+        let consideredWeight = weight?.converted(to: .pounds).value ?? 150.0
+
+        return Measurement<UnitVolume>(value: consideredWeight * 0.667, unit: .fluidOunces)
+    }
+
     public func currentGoalForToday() -> Measurement<UnitVolume>? {
         guard let goalModelQuantity = self.currentGoalModelForToday()?.quantity else {
             return nil
